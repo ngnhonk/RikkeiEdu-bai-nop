@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai 10</title>
+
+    <script>
+        let month = +prompt("Tháng cần kiểm tra: ");
+        let year = +prompt("Năm cần kiểm tra: ");
+
+        if (Number.isInteger(month) && Number.isInteger(year)) {
+            if (month > 0 && month < 13) {
+                switch (month) {
+                    case 2:
+                        if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
+                            alert(`Tháng 2 năm ${year} có 29 ngày.`);
+                            break;
+                        } else {
+                            alert(`Tháng 2 năm ${year} có 28 ngày.`);
+                            break;
+                        }
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        alert(`Tháng ${month} năm ${year} có 31 ngày.`);
+                        break;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        alert(`Tháng ${month} năm ${year} có 30 ngày.`);
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                alert("Không hợp lệ!")
+            }
+        } else {
+            alert("Không hợp lệ!")
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

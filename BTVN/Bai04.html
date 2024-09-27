@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bai 4</title>
-</head>
-<script>
-
-</script>
-<body>
     
+    <script>
+        let height = +prompt("Nhập vào chiều cao");
+        let weight = +prompt("Nhập vào cân nặng");
+
+        let bmi = weight / (height ** 2);
+
+        if (bmi >= 40) {
+            alert("Béo phì độ III");
+        } else if (bmi >= 35) {
+            alert("Béo phì độ II");
+        } else if (bmi >= 30) {
+            alert("Béo phì độ I");
+        } else if (bmi >= 25) {
+            alert("Tiền béo phì");
+        } else if (bmi >= 18.5) {
+            alert("Bình thường");
+        } else {
+            alert("Gầy");
+        }
+    </script>
+</head>
+
+<body>
+
 </body>
+
 </html>

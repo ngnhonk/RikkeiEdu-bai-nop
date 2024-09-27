@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <script>
+        let a = +prompt("Phương trình: ax^2 + bx + c = 0; nhập vào a: ");
+        let b = +prompt("Phương trình: ax^2 + bx + c = 0; nhập vào b: ");
+        let c = +prompt("Phương trình: ax^2 + bx + c = 0; nhập vào c: ");
+
+        let delta = b ** 2 - 4 * a * c;
+
+        if (delta < 0) {
+            alert("Phương trình vô nghiệm.");
+           
+        } else if (delta === 0) {
+                alert("Phương trình có nghiệm kép x1 = x2 = " + -b/(2*a));
+        } else {
+            alert("Phương trình có hai nghiệm  phân biệt là: x1 = " + (-b + Math.sqrt(delta))/(2*a) + " và x2 = " + (-b - Math.sqrt(delta))/(2*a));
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

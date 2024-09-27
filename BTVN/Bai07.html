@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai 7</title>
+
+    <script>
+        let a = +prompt("Phương trình: ax + b = 0; nhập vào a: ");
+        let b = +prompt("Phương trình: ax + b = 0; nhập vào b: ");
+
+        if (a === 0) {
+            if (b === 0) {
+                alert("Phương trình có vô số nghiệm.");
+            } else {
+                alert("Phương trình vô nghiệm.");
+            }
+        } else {
+            let x = -b / a;
+            alert("Nghiệm của phương trình là x = " + x);
+        }
+    </script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
