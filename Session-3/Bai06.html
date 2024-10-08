@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai 06</title>
+    <script>
+        let arr = [1, 3, 2, 3, 6, 7, 10, 8, 9];
+        arr.sort((a, b) => a - b);
+        let odd = [];
+        let even = [];
+        for(let i = 0; i < arr.length; i++){
+            if(arr[i] % 2 === 0){
+                even.push(arr[i]);
+            } else {
+                odd.push(arr[i]);
+            }
+        }
+        for(let i = 0; i < odd.length; i++){
+            even.push(odd[i]);
+        }
+        for(let i of even){
+            console.log(i);
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

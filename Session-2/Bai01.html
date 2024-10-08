@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session 2- Bai 01</title>
+    <script>
+        let result = Math.floor(Math.random() * 10);
+
+        do {
+            let numIn = +prompt("Nhập vào số bạn dự đoán");
+            if(numIn > result){
+                alert("Nhỏ hơn!");
+            } else if (numIn < result){
+                alert("Lớn hơn!");
+            } else {
+                alert("Bingo!");
+            }
+        } while (numIn !== result);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

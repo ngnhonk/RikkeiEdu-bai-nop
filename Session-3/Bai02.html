@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai 02</title>
+    <script>
+        let nums = [1, 1, 2, 3, 4, 3, 2, 7, 6, 3, 7, 9];
+        for(let i = 0; i < nums.length; i++){
+            let dem = 0;
+            for(let j = i; j < nums.length; j++){
+                if(nums[j] === nums[i]){
+                    dem++;
+                }
+                if(dem >= 2){
+                    console.log(nums[i]);
+                }
+            }
+            // console.log(`${nums[i]} : ${dem}`);
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
