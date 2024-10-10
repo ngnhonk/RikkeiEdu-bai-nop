@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai 01</title>
+    <script>
+        let arr = [1, 4, 6, 1, 2, 7, 9, 3, 12];
+        let soNhap = 8;
+
+        function timKetQua(arr, soNhap) {
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = i + 1; j < arr.length; j++) {
+                    if(soNhap === (arr[i] + arr[j])){
+                        console.log(arr[i]);
+                        console.log(arr[j]);
+                        return[arr[i], arr[j]];
+                    }
+                }
+            }
+        }
+
+        console.log(timKetQua(arr, soNhap));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
