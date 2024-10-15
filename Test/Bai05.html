@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai 05</title>
+    <script>
+        let employee = [{
+                name: "Nguyen Van A",
+            },
+            {
+                name: "Nguyen Van B",
+            },
+            {
+                name: "Nguyen Van C",
+            },
+        ]
+
+        function readEmployee() {
+            for (let i in employee) {
+                console.log(employee[i].name);
+            }
+        }
+
+        function createEmployee() {
+            let cName = prompt("Nhap vao ten nhan vien can them:");
+            let newEmployee = {
+                name:cName,
+            }
+
+            let checkName = employee.find(Element => Element.name === cName);
+            if (!checkName) {
+                employee.push(newEmployee);
+                alert("Success!")
+            } else {
+                alert("Fail!");
+            }
+
+        }
+
+        function updateEmployee(){
+            let cName = prompt("Nhap vao ten nhan vien can sua:");
+            let checkName = employee.find(Element => Element.name === cName);
+            if (!checkName) {
+                alert("Does't exist");
+            } else {
+                let uName = prompt("Sua thanh: ");
+                let index = employee.findIndex(Element => Element.name === cName);
+                employee[index].name = uName;
+                alert("Success!")
+            }
+        }
+
+        function deleteEmployee(){
+            let dName = prompt("Nhap vao ten nhan vien can xoa:");
+            let checkName = employee.find(Element => Element.name === dName);
+            if (!checkName) {
+                alert("Does't exist");
+                
+            } else {
+                let index = employee.findIndex(Element => Element.name === dName);
+                employee.splice(index, 1);
+                alert("Success!")
+            }
+        }
+
+        deleteEmployee();
+        readEmployee();
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let arr = ["one", "three", "two", "one", "three", "two", "three"];
+        let subArr = [];
+        let i = 0;
+        for (let i = 0; i < arr.length; i++) {
+            let check = subArr.find(Element => Element === arr[i]);
+            if (!check) {
+                subArr.push(arr[i]);
+            }
+        }
+
+        for (let index in subArr) {
+            console.log(subArr[index]);
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
