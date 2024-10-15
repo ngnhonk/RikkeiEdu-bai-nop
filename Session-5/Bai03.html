@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai 03</title>
+    <script>
+        let user = [
+            {
+                id: 1,
+                user_name: "Nguyen Van A",
+                email: "nguyenvana@gmail.com",
+                password: "nguyenvana@",
+            },
+            {
+                id: 2,
+                user_name: "Nguyen Thi B",
+                email: "nguyenthib@gmail.com",
+                password: "nguyenthib@",
+            },
+            {
+                id: 3,
+                user_name: "Tran Van C",
+                email: "tranvanc@gmail.com",
+                password: "tranvanc@",
+            }
+        ];
+
+        function checkName(name) {
+            return name.length >= 3 && name.trim() !== '';
+        }
+
+        function checkMail(mail) {
+            let regex = /@.+\.com$/;
+            return regex.test(mail);
+        }
+
+        function checkPass(pass) {
+            return pass.length > 7;
+        }
+
+        function addUser() {
+            let inName, inMail, inPass;
+            do {
+                inName = prompt("Nhập vào tên của bạn: ");
+                inMail = prompt("Nhập vào email của bạn: ");
+                inPass = prompt("Nhập vào mật khẩu của bạn: ");
+            } while (!checkName(inName) || !checkMail(inMail) || !checkPass(inPass));
+
+            user.push({
+                id: user.length > 0 ? user[user.length - 1].id + 1 : 1,
+                user_name: inName,
+                email: inMail,
+                password: inPass,
+            });
+
+            console.log(user);
+            exit;
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

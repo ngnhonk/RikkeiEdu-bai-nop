@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai 2</title>
+    <script>
+        let product = [{
+                id: 1,
+                product_name: "San pham thu nhat",
+                price: 100,
+            },
+            {
+                id: 2,
+                product_name: "San pham thu hai",
+                price: 400,
+            },
+            {
+                id: 3,
+                product_name: "San pham thu ba",
+                price: 200,
+            },
+            {
+                id: 4,
+                product_name: "San pham thu tu",
+                price: 300,
+            }
+        ]
+
+        let subProduct = [];
+
+        while (product.length > 0) {
+            let min = 999999;
+            for (let j in product) {
+                if (product[j].price < min) {
+                    min = product[j].price;
+                }
+            }
+            let index = product.findIndex(Element => Element.price === min);
+            subProduct.push(product[index]);
+            product.splice(index, 1);
+        }
+
+        for (let i in subProduct) {
+            console.log(subProduct[i]);
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

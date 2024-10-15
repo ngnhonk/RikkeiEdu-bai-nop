@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai 01</title>
+    <script>
+        let bookshelf = [
+            {
+                author: "ten tac gia",
+                name: "ten sach"
+            },
+            {
+                author: "nguyen one",
+                name: "sach one"
+            },
+            {
+                author: "nguyen two",
+                name: "sach two"
+            },
+            {
+                author: "van three",
+                name: "sach three"
+            },
+
+        ]
+
+        let inName = prompt("Nhap vao ten tac gia: ");
+        let cName = bookshelf.find(Element => Element.author === inName)
+        if(!cName){
+            alert("Không tìm thấy sách!");
+        } else {
+            let index = bookshelf.findIndex(Element => Element.author === inName);
+            alert(`Ten sach la: ${bookshelf[index].name}`);
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
