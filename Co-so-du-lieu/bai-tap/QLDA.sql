@@ -85,3 +85,27 @@ group by projectid;
 select projectID, status, COUNT(*) as task_count
 from  tasks
 group by  projectID, status;
+
+
+-- Viết truy vấn để lấy thông tin các nhân viên cùng
+-- với số lượng công việc họ đã thực hiện và tổng số giờ làm việc của họ.
+select 
+    e.EmployeeID,
+    e.EmployeeName,
+    COUNT(t.TaskID) as TotalTasks,
+    coalesce(SUM(t.HoursWorked), 0) as TotalHoursWorked
+from 
+    Employees e
+left join 
+    Tasks t on e.EmployeeID = t.AssignedTo
+group by 
+    e.EmployeeID, e.EmployeeName;
+    
+-- Viết truy vấn để tính lương trung bình của các
+-- nhân viên theo vị trí (position). Sử dụng hàm AVG và GROUP BY.
+select
+    Position, avg(Salary) as LuongTB
+from 
+    Employees
+group by 
+    Position;
