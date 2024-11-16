@@ -1,4 +1,4 @@
-drop schema temp_db;
+
 create schema temp_db;
 use temp_db;
 
@@ -64,4 +64,21 @@ INSERT INTO OrderDetails (order_id, product_id, quantity, unitprice) VALUES
 (3, 4, 1, 150.00),
 (4, 5, 2, 60.00),
 (5, 5, 1, 120.00);
+
+select orderdetails.id as `Ma don`,
+	(orderdetails.unitprice*orderdetails.quantity) as `GT Don hang`,
+	orders.orderdate as `Thoi gian`
+from orderdetails
+join orders on orderdetails.order_id = orders.id
+join products on orderdetails.product_id = products.id
+join customers on orders.customer_id = customers.id;
+
+select count(*) as `Tong so luong don`,
+	sum(orderdetails.unitprice*orderdetails.quantity) as `Tong GT`,
+    date_format(orders.orderdate, '%y-%m') as `Thang`
+from orderdetails
+join orders on orderdetails.order_id = orders.id
+join products on orderdetails.product_id = products.id
+join customers on orders.customer_id = customers.id
+group by `Thang`;
 
