@@ -268,7 +268,6 @@ end //
 delimiter ;
 
 -- Tạo một procedure tên paginateProducts để phân trang danh sách sản phẩm, với hai tham số pageNumber và pageSize.
-
 delimiter //
 create procedure paginateProducts(in pageNumber int, pageSize int)
 begin
