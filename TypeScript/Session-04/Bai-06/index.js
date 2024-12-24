@@ -24,129 +24,103 @@ class TaskManager {
         this.employees = [];
         this.tasks = [];
         this.assignments = [];
-        this.id = 0;
+        this.employeeId = 1;
+        this.taskId = 1;
     }
     addEmployee(name) {
-        let indexEmp = this.id;
-        this.employees.push(new Employee(indexEmp++, name));
-        console.log("Đã thêm nhân viên thành công!");
+        this.employees.push(new Employee(this.employeeId++, name));
+        console.log(`Đã thêm nhân viên: ${name}`);
     }
     addTask(title, deadline) {
-        let indexTask = this.id;
-        this.tasks.push(new Task(indexTask++, title, deadline));
-        console.log("Đã thêm Task thành công!");
+        this.tasks.push(new Task(this.taskId++, title, deadline));
+        console.log(`Đã thêm Task: ${title} - Deadline: ${deadline}`);
     }
     assignTask(employeeId, taskId) {
-        let checkEmployeeID = this.employees.findIndex((element) => element.id === employeeId);
-        let checkTaskID = this.tasks.findIndex((element) => element.id === taskId);
-        if (!checkEmployeeID) {
+        const employeeIndex = this.employees.findIndex((emp) => emp.id === employeeId);
+        const taskIndex = this.tasks.findIndex((task) => task.id === taskId);
+        if (employeeIndex === -1) {
             console.log("Nhân viên không tồn tại!");
             return;
         }
-        if (!checkTaskID) {
+        if (taskIndex === -1) {
             console.log("Task không tồn tại!");
             return;
         }
-        this.assignments.push(new Assignment(this.employees[checkEmployeeID], this.tasks[checkTaskID]));
-        console.log("Đã thêm phân công thành công!");
+        this.assignments.push(new Assignment(this.employees[employeeIndex], this.tasks[taskIndex]));
+        console.log("Đã phân công Task thành công!");
     }
     completeTask(taskId) {
-        let checkUpdateTaskID = this.tasks.findIndex(element => element.id === taskId);
-        if (!checkUpdateTaskID) {
-            console.log("Task không tồn tại");
+        const taskIndex = this.tasks.findIndex((task) => task.id === taskId);
+        if (taskIndex === -1) {
+            console.log("Task không tồn tại!");
             return;
         }
-        this.tasks[checkUpdateTaskID].isCompleted = true;
-        console.log(`Đã sửa trạng thái của task ${taskId} thành công!`);
+        this.tasks[taskIndex].isCompleted = true;
+        console.log(`Đã hoàn thành Task: ${this.tasks[taskIndex].title}`);
     }
     listTasks() {
         if (this.assignments.length === 0) {
-            console.log("Chưa có bất kỳ công việc nào cả !!!");
+            console.log("Chưa có bất kỳ công việc nào!");
+            return;
         }
-        else {
-            for (let i of this.tasks) {
-                // console.log(`Employee: ${i.employee.name} - Task: ${i.task.title} - Deadline: ${i.task.deadline} - Complete: ${i.task.isCompleted}`);
-                console.log(i.title + " - " + i.deadline + " - " + i.isCompleted);
-            }
-        }
-    }
-    getListLength() {
-        return this.assignments.length;
+        console.log("Danh sách công việc:");
+        this.assignments.forEach((assignment) => {
+            const { employee, task } = assignment;
+            console.log(`Nhân viên: ${employee.name} - Task: ${task.title} - Deadline: ${task.deadline} - Trạng thái: ${task.isCompleted ? "Hoàn thành" : "Chưa hoàn thành"}`);
+        });
     }
 }
 class Main {
     constructor() {
-        this._taskManager = new TaskManager();
+        this.taskManager = new TaskManager();
+    }
+    readInput(promptText) {
+        let input = prompt(promptText);
+        while (!input) {
+            console.log("Vui lòng nhập đầy đủ!");
+            input = prompt(promptText);
+        }
+        return input;
     }
     bootstrap() {
         let loop = true;
         while (loop) {
-            // console.log("Menu chức năng:");
-            // console.log("1. Thêm nhân viên mới.");
-            // console.log("2. Thêm task mới.");
-            // console.log("3. Gán task cho nhân viên.");
-            // console.log("4. Đánh dấu task hoàn thành.");
-            // console.log("5. Hiển thị danh sách task");
-            // console.log("6. Dừng chương trình.");
-            let choice = prompt(`
+            const choice = prompt(`
                 1. Thêm nhân viên mới
-                2. Thêm task mới
-                3. Gán task cho nhân viên
-                4. Đánh dấu task hoàn thành
-                5. Hiển thị danh sách task
-                6. Dừng chương trình`);
+                2. Thêm Task mới
+                3. Gán Task cho nhân viên
+                4. Đánh dấu Task hoàn thành
+                5. Hiển thị danh sách Task
+                6. Thoát chương trình
+            `);
             switch (choice) {
                 case "1":
-                    let inName = prompt("Nhập vào tên nhân viên: ");
-                    if (!inName) {
-                        console.log("Vui lòng nhập đầy đủ!");
-                    }
-                    else {
-                        this._taskManager.addEmployee(inName);
-                        break;
-                    }
+                    const name = this.readInput("Nhập vào tên nhân viên: ");
+                    this.taskManager.addEmployee(name);
+                    break;
                 case "2":
-                    let inTask = prompt("Nhập vào tên task: ");
-                    let inDeadLine = prompt("Nhập vào deadline: ");
-                    if (!inTask || !inDeadLine) {
-                        console.log("Vui lòng nhập đầy đủ!");
-                    }
-                    else {
-                        this._taskManager.addTask(inTask, inDeadLine);
-                        break;
-                    }
+                    const title = this.readInput("Nhập vào tên Task: ");
+                    const deadline = this.readInput("Nhập vào deadline (yyyy-mm-dd): ");
+                    this.taskManager.addTask(title, deadline);
+                    break;
                 case "3":
-                    // assignTask(employeeId: number, taskId: number)
-                    let inEmployeeID = prompt("Nhập vào Employee ID: ");
-                    let inTaskID = prompt("Nhập vào Task ID: ");
-                    if (!inEmployeeID || !inTaskID) {
-                        console.log("Vui lòng nhập đầy đủ thông tin!");
-                    }
-                    else {
-                        let valEmployeeID = parseInt(inEmployeeID, 10);
-                        let valTaskID = parseInt(inTaskID, 10);
-                        this._taskManager.assignTask(valEmployeeID, valTaskID);
-                        break;
-                    }
+                    const empId = parseInt(this.readInput("Nhập vào Employee ID: "), 10);
+                    const taskId = parseInt(this.readInput("Nhập vào Task ID: "), 10);
+                    this.taskManager.assignTask(empId, taskId);
+                    break;
                 case "4":
-                    let inUpdateID = prompt("Nhập vào Task ID: ");
-                    if (!inUpdateID) {
-                        console.log("Vui lòng nhập đầy đủ!");
-                    }
-                    else {
-                        let valUpdateID = parseInt(inUpdateID);
-                        this._taskManager.completeTask(valUpdateID);
-                        break;
-                    }
+                    const completeTaskId = parseInt(this.readInput("Nhập vào Task ID cần hoàn thành: "), 10);
+                    this.taskManager.completeTask(completeTaskId);
+                    break;
                 case "5":
-                    this._taskManager.listTasks();
+                    this.taskManager.listTasks();
                     break;
                 case "6":
-                    console.log("Cảm ơn, hẹn gặp lại !!!!");
+                    console.log("Cảm ơn bạn đã sử dụng chương trình! Hẹn gặp lại.");
                     loop = false;
                     break;
                 default:
-                    console.log("Lựa chọn không hợp lệ !!!");
+                    console.log("Lựa chọn không hợp lệ! Vui lòng thử lại.");
                     break;
             }
         }
