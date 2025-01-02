@@ -47,21 +47,40 @@ class Product {
     this.quantity = quantity;
   }
 
-  sell(quantity: number){
+  sell(quantity: number) {
     this.quantity -= quantity;
+    console.log(`Đã giảm ${quantity} sản phẩm trong kho`);
   }
 
-  restock(quantity: number){
+  restock(quantity: number) {
     this.quantity += quantity;
+    console.log(`Đã thêm ${quantity} sản phẩm trong kho`);
   }
 
-  getDetails(){
+  getDetails() {
     console.log(`ID: ${this.id} - Name: ${this.name} - Price: ${this.price} Quantity: ${this.quantity}`);
   }
 }
 
-class Invoice {}
+class Invoice {
+  customer: Customer;
+  employee: Employee;
+  products: { product: Product, quantity: number }[];
+  totalAmount: number;
 
-class StoreManager {}
+  constructor(customer: Customer, employee: Employee, products: { product: Product, quantity: number }[], totalAmount: number) {
+    this.employee = employee;
+    this.customer = customer;
+    this.products = products;
+    this.totalAmount = totalAmount;
+  }
 
-class Main {}
+  private calculateTotal(): number {
+    return this.products.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+  }
+}
+
+class StoreManager {
+
+}
+
