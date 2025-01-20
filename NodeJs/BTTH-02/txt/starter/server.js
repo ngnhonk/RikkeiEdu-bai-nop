@@ -25,7 +25,9 @@ let readSingleProduct = fs.readFileSync("../../templates/single-product.html", {
 let readProduct = fs.readFileSync("../../templates/product.html", {
   encoding: "utf8",
 });
-
+let readCreate = fs.readFileSync("../../templates/create.html", {
+  encoding: "utf8",
+});
 const server = createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader("Content-Type", "text/html ;charset=utf8");
@@ -69,7 +71,7 @@ const server = createServer((req, res) => {
           .replaceAll("{{nutrients}}", found.nutrients)
           .replaceAll("{{price}}", found.price)
           .replaceAll("{{description}}", found.description)
-          .replaceAll("{{id}}", found.price);
+          .replaceAll("{{id}}", found.id);
 
         let replacedProduct = readProduct.replaceAll(
           "{{content}}",
@@ -111,7 +113,7 @@ const server = createServer((req, res) => {
               .replaceAll("{{nutrients}}", element.nutrients)
               .replaceAll("{{price}}", element.price)
               .replaceAll("{{description}}", element.description)
-              .replaceAll("{{id}}", element.price);
+              .replaceAll("{{id}}", element.id);
           });
           res.end(
             readProduct.replaceAll("{{content}}", replacedFound.join(""))
@@ -119,6 +121,52 @@ const server = createServer((req, res) => {
         }
       } else {
         res.end(readSearch.replace("{{message}}", "Wat r zu looking for?"));
+      }
+      break;
+
+    case req.url === "/create":
+      res.end(readCreate);
+      let route = "/create";
+      let data = "p=value";
+      if (req.method == "POST") {
+        let data = "";
+        req
+          .on("error", (err) => {
+            console.error(err);
+          })
+          .on("data", (chunk) => {
+            data += chunk.toString();
+          })
+          .on("end", () => {
+            let queryString = url.parse(`${route}?${data}`, true).query;
+            let newFruit = {
+              ...queryString,
+            };
+
+            let lastestId = parsedData[parsedData.length - 1].id + 1;
+            newFruit.id = lastestId;
+            parsedData.push(newFruit);
+            fs.writeFileSync(
+              "../../dev-data/data.json",
+              JSON.stringify(parsedData)
+            );
+          });
+      }
+      break;
+
+    case req.url.startsWith("/delete/"):
+      let deleteID = req.url.split("/")[2];
+      let FoundDelete = parsedData.findIndex(
+        (element) => element.id == deleteID
+      );
+
+      if (!FoundDelete) {
+        res.statusCode = 404;
+        res.end(`NOT FOUND THIS PRODUCT!`);
+      } else {
+        parsedData.splice(FoundDelete, 1);
+        fs.writeFileSync("../../dev-data/data.json", JSON.stringify(parsedData));
+        res.end("DONE");
       }
       break;
     default:

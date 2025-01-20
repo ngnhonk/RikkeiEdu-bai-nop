@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Create new product</title>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create new product</title>
 
-        <style>
+    <style>
         *,
         *::before,
         *::after {
@@ -124,7 +124,7 @@
         }
 
         .card__emoji {
-font-size: 5.5rem;
+            font-size: 5.5rem;
             line-height: 1.2;
             padding: 1.5rem 6rem 0.5rem 1.5rem;
             letter-spacing: -4rem;
@@ -228,50 +228,49 @@ font-size: 5.5rem;
             display: none;
         }
     </style>
-    </head>
+</head>
 
-    <body>
-        <div class="container">
-            <h1>🥦 Create your fruits 🌽</h1>
-            <figure class="card">
-                <form method="POST" class="create-form">
-                    <div class="input-wrapper">
-                        <input type="text" name="productName"
-                            placeholder="Product Name">
-                    </div>
-                    <div class="input-wrapper">
-                        <input type="text" name="image" placeholder="Image">
-                    </div>
-                    <div class="input-wrapper">
-                        <input type="text" name="from" placeholder="Country">
-                    </div>
-                    <div class="input-wrapper">
-                        <input type="text" name="nutrients"
-                            placeholder="Nutrients">
-                    </div>
-                    <div class="input-wrapper">
-                        <input type="number" name="quantity"
-                            placeholder="Quantity">
-                    </div>
-                    <div class="input-wrapper">
-                        <input type="text" name="price" placeholder="Price">
-                    </div>
-                    <div class="input-wrapper">
-                        <input type="text" name="description"
-                            placeholder="Product Name">
-                    </div>
-                    <div class="input-wrapper checkbox">
-                        <input id="box" name="organic" type="checkbox"
-                            checked="true" />
-                        <label class="box-label" for="">
-                            Organic
-                        </label>
-                    </div>
-                    <button type="submit">
-                        🥭🥭BOOM! Add fruit🥦🥦
-                    </button>
-                </form>
-            </figure>
-        </div>
-    </body>
+<body>
+    <div class="container">
+        <h1>🥦 Create your fruits 🌽</h1>
+        <figure class="card">
+            <form method="POST" class="create-form">
+                <div class="input-wrapper">
+                    <input type="text" name="productName" placeholder="Product Name">
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" name="image" placeholder="Image">
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" name="from" placeholder="Country">
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" name="nutrients" placeholder="Nutrients">
+                </div>
+                <div class="input-wrapper">
+                    <input type="number" name="quantity" placeholder="Quantity">
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" name="price" placeholder="Price">
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" name="description" placeholder="Product Name">
+                </div>
+                <div class="input-wrapper checkbox">
+                    <input id="box" name="organic" type="checkbox" checked="true" />
+                    <label class="box-label" for="">
+                        Organic
+                    </label>
+                </div>
+                <button type="submit">
+                    🥭🥭BOOM! Add fruit🥦🥦
+                </button>
+            </form>
+            <script>
+                let x = document.forms["myForm"]["fname"].value;
+            </script>
+        </figure>
+    </div>
+</body>
+
 </html>
