@@ -236,25 +236,25 @@
         <figure class="card">
             <form method="POST" class="create-form">
                 <div class="input-wrapper">
-                    <input type="text" name="productName" placeholder="Product Name">
+                    <input type="text" name="productName" placeholder="Product Name" required>
                 </div>
                 <div class="input-wrapper">
                     <input type="text" name="image" placeholder="Image">
                 </div>
                 <div class="input-wrapper">
-                    <input type="text" name="from" placeholder="Country">
+                    <input type="text" name="from" placeholder="Country" required>
                 </div>
                 <div class="input-wrapper">
-                    <input type="text" name="nutrients" placeholder="Nutrients">
+                    <input type="text" name="nutrients" placeholder="Nutrients" required>
                 </div>
                 <div class="input-wrapper">
-                    <input type="number" name="quantity" placeholder="Quantity">
+                    <input type="number" name="quantity" placeholder="Quantity" required>
                 </div>
                 <div class="input-wrapper">
-                    <input type="text" name="price" placeholder="Price">
+                    <input type="text" name="price" placeholder="Price" required>
                 </div>
                 <div class="input-wrapper">
-                    <input type="text" name="description" placeholder="Product Name">
+                    <input type="text" name="description" placeholder="Description" required>
                 </div>
                 <div class="input-wrapper checkbox">
                     <input id="box" name="organic" type="checkbox" checked="true" />
@@ -267,8 +267,68 @@
                 </button>
             </form>
             <script>
-                let x = document.forms["myForm"]["fname"].value;
+                document.addEventListener('DOMContentLoaded', function () {
+                    const form = document.querySelector('.create-form');
+
+                    form.addEventListener('submit', function (event) {
+                        // Lấy tất cả các giá trị của input
+                        const productName = document.querySelector('input[name="productName"]').value
+                            .trim();
+                        const image = document.querySelector('input[name="image"]').value.trim();
+                        const country = document.querySelector('input[name="from"]').value.trim();
+                        const nutrients = document.querySelector('input[name="nutrients"]').value
+                    .trim();
+                        const quantity = document.querySelector('input[name="quantity"]').value.trim();
+                        const price = document.querySelector('input[name="price"]').value.trim();
+                        const description = document.querySelector('input[name="description"]').value
+                            .trim();
+
+                        let isValid = true;
+                        let errorMessage = "";
+
+                        if (!productName) {
+                            isValid = false;
+                            errorMessage += "Product Name không được để trống.\n";
+                        }
+
+                        if (!image) {
+                            isValid = false;
+                            errorMessage += "Image không được để trống.\n";
+                        }
+
+                        if (!country) {
+                            isValid = false;
+                            errorMessage += "Country không được để trống.\n";
+                        }
+
+                        if (!nutrients) {
+                            isValid = false;
+                            errorMessage += "Nutrients không được để trống.\n";
+                        }
+
+                        if (!quantity || isNaN(quantity) || quantity <= 0) {
+                            isValid = false;
+                            errorMessage += "Quantity phải là số và lớn hơn 0.\n";
+                        }
+
+                        if (!price || isNaN(price) || price <= 0) {
+                            isValid = false;
+                            errorMessage += "Price phải là số và lớn hơn 0.\n";
+                        }
+
+                        if (!description) {
+                            isValid = false;
+                            errorMessage += "Description không được để trống.\n";
+                        }
+
+                        if (!isValid) {
+                            event.preventDefault();
+                            alert(errorMessage);
+                        }
+                    });
+                });
             </script>
+
         </figure>
     </div>
 </body>

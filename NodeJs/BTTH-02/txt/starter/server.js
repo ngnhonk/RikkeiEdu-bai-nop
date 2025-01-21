@@ -60,7 +60,6 @@ const server = createServer((req, res) => {
         res.statusCode = 404;
         res.end(`404 NOT FOUND`);
       } else {
-        console.log(found);
         let singleProduct = readSingleProduct
           .replaceAll("{{image}}", found.image)
           .replaceAll("{{image1}}", found.image)
@@ -89,7 +88,6 @@ const server = createServer((req, res) => {
       const parsedUrl = url.parse(req.url, true);
       const queryParams = parsedUrl.query;
       let findWat = queryParams.p;
-      console.log(findWat);
       if (findWat) {
         let foundWat = parsedData.filter((element) =>
           String(element.productName.toLocaleLowerCase()).includes(
