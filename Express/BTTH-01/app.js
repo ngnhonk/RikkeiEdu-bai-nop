@@ -12,6 +12,17 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 let users = fs.readFileSync("./dev-data/users.json", { encoding: "utf8" });
 users = JSON.parse(users);
 
+const checkExist = (req, res, next) => {
+  let user = users.find(
+    (user) => user._id === req.params.id || user.email === req.body.email
+  );
+
+  if (user === -1 || user === -1) {
+    return res.json({ message: "User not found" });
+  }
+  next();
+};
+
 app.get("/", (req, res) => {
   res.send("This is homepage");
 });
@@ -31,7 +42,7 @@ app.get("/api/v1/users", (req, res) => {
 });
 
 // Tra ve mot user
-app.get("/api/v1/users/:id", (req, res) => {
+app.get("/api/v1/users/:id", checkExist, (req, res) => {
   let findUser = users.findIndex((element) => element._id === req.params.id);
   if (findUser === -1) {
     res.json({
@@ -46,7 +57,7 @@ app.get("/api/v1/users/:id", (req, res) => {
 });
 
 // Them mot user
-app.post("/api/v1/users", (req, res) => {
+app.post("/api/v1/users", checkExist, (req, res) => {
   let newUser = { ...req.body, _id: Math.random() };
 
   let checkEmail = users.findIndex(
@@ -65,12 +76,12 @@ app.post("/api/v1/users", (req, res) => {
 });
 
 // Cap nhat user
-app.put("/api/v1/users/:id", (req, res) => {
+app.put("/api/v1/users/:id", checkExist, (req, res) => {
   let updateID = users.findIndex((element) => element._id === req.params.id);
   if (updateID === -1) {
     res.send({ message: "User not found" });
   } else {
-    users[updateID] = { ...req.body };
+    users[updateID] = { ...users[updateID], ...req.body };
     fs.writeFileSync("./dev-data/users.json", JSON.stringify(users));
     res.send({
       message: "Updated successfully",
@@ -79,7 +90,7 @@ app.put("/api/v1/users/:id", (req, res) => {
 });
 
 // Xoa mot user
-app.delete("/api/v1/users/:id", (req, res) => {
+app.delete("/api/v1/users/:id", checkExist, (req, res) => {
   let deleteID = users.findIndex((element) => element._id === req.params.id);
   if (deleteID === -1) {
     res.send({ message: "User not found" });
@@ -91,11 +102,7 @@ app.delete("/api/v1/users/:id", (req, res) => {
 });
 
 app.use((req, res) => {
-  res
-    .status(404)
-    .send(
-      `<h1 style="text-align:center; align-item: center">Page not found</h1>`
-    );
+  res.status(404).send(`<h1 style="text-align:center">Page not found</h1>`);
 });
 
 app.listen(port, () => {
