@@ -4,6 +4,7 @@ const fs = require("fs");
 const bodyParser = require("body-parser");
 const { monitorEventLoopDelay } = require("perf_hooks");
 const { Router } = require("express");
+router.use(express.static("public"));
 
 router.use(bodyParser.json()); // for parsing application/json
 router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -30,13 +31,6 @@ const checkExistContent = (req, res, next) => {
     : res.status(404).json({ message: "Question already exists" });
 };
 
-router.get("/", (req, res) => {
-  res.send(`This is hoomepage!`);
-});
-
-router.get("/ask", (req, res) => { 
-  res.send("This is asking page!");
-});
 
 router.get("/question-detail/:id", checkExistID, (req, res) => {
   res.send("This is question details page!");
